@@ -10,7 +10,23 @@ var getUserRepos = function(user) {
     });
 };
 
-getUserRepos("GildedRose");
+var userFormE1 = document.querySelector("#user-form");
+var nameInputE1 = document.querySelector("#username")
 
-//var response = fetch("https://api.github.com/users/octocat/repos");
-//console.log(response);
+// executed on form submission browser event
+var formSumbitHandler = function(event) {
+    event.preventDefault();
+    //get value from input element
+    var username = nameInputE1.value.trim();
+
+    if (username) {
+        getUserRepos(username);
+        nameInputE1.value = "";
+    } else {
+        alert("Please enter a GitHub username");
+    }
+    console.log(event);
+};
+
+userFormE1.addEventListener("submit", formSumbitHandler);
+
