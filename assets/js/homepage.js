@@ -18,7 +18,7 @@ var getUserRepos = function(user) {
             }
         })
         .catch(function(error) {
-            //Notice this '.cathc()' getting chained onto the end of the'.then()'
+            //Notice this '.catch()' getting chained onto the end of the'.then()'
             alert("Unable to connect to GitHub");
         });
 };
@@ -55,9 +55,10 @@ var displayRepos = function(repos, searchTerm) {
         //format repo name
         var repoName = repos[i].owner.login + "/" + repos[i].name;
 
-        //create a container for each repo
-        var repoE1 = document.createElement("div");
-        repoE1.classList = "list-item flex-row justify-space-between align center";
+        //create a link for each repo
+        var repoE1 = document.createElement("a");
+        repoE1.classList = "list-item flex-row justify-space-between align-center";
+        repoE1.setAttribute("href", "./single-repo.html?repo=" + repoName);
 
         // create a span element to hold repository name
         var titleE1 = document.createElement("span");
@@ -69,9 +70,10 @@ var displayRepos = function(repos, searchTerm) {
         // create a status element
         var statusE1 = document.createElement("span");
         statusE1.classList = "flex-row align cetner";
+     }
 
         // check if current repo has issues or not
-        if (repos[i].open_issues_count > 0){
+        if (repos[i].open_issues_count > 0) {
             statusE1.innerHTML =
             "<i class='fas fa-times status-icon icon-danger'></i>" + repos[i].open_issues_count + "issue(s)";
         } else {
@@ -83,7 +85,6 @@ var displayRepos = function(repos, searchTerm) {
 
         // append container to dom
         repoContainerE1.appendChild(repoE1);
-    }
 };
 
 userFormE1.addEventListener("submit", formSumbitHandler);

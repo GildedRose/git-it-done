@@ -55,7 +55,7 @@ var displayIssues = function(issues){
 
         // append to container
         issueE1.appendChild(typeE1);
-        issueContainerE1.appendChild(issueE1);
+        //issueContainerE1.appendChild(issueE1);
     }
 };
 
