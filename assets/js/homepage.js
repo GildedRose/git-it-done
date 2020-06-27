@@ -1,12 +1,16 @@
 var repoContainerE1 = document.querySelector("#repos-container");
 var repoSearchTerm = document.querySelector("#repo-search-term");
+var userFormE1 = document.querySelector("#user-form");
+var languageButtonsE1 = document.querySelector("#language-buttons");
+var nameInputE1 = document.querySelector("#username");
 
 var getUserRepos = function(user) {
-    //format the github api url
+    // format the github api url
     var apiUrl = "https://api.github.com/users/" + user + "/repos";
-
-    //make a request to the url
+  
+    // make a get request to url
     fetch(apiUrl)
+<<<<<<< HEAD
         .then(function(response) {
             // request was successful
             if (response.ok){
@@ -20,11 +24,38 @@ var getUserRepos = function(user) {
         .catch(function(error) {
             //Notice this '.catch()' getting chained onto the end of the'.then()'
             alert("Unable to connect to GitHub");
-        });
-};
+=======
+      .then(function(response) {
+        // request was successful
+        if (response.ok) {
+          console.log(response);
+          response.json().then(function(data) {
+            console.log("abc");
+            displayRepos(data, user);
+          });
+        } else {
+          alert("Error: " + response.statusText);
+        }
+      })
+      .catch(function(error) {
+        alert("Unable to connect to GitHub");
+      });
+  };
 
-var userFormE1 = document.querySelector("#user-form");
-var nameInputE1 = document.querySelector("#username")
+  var getFeaturedRepos = function(language) {
+    var apiUrl = "https://api.github.com/search/repositories?q=" + language + "+is:featured&sort=help-wanted-issues";
+  
+    fetch(apiUrl).then(function(response) {
+      if (response.ok) {
+        response.json().then(function(data) {
+          displayRepos(data.items, language);
+>>>>>>> feature/user-repos
+        });
+      } else {
+        alert("Error: " + response.statusText);
+      }
+    });
+  };
 
 // executed on form submission browser event
 var formSumbitHandler = function(event) {
@@ -41,7 +72,20 @@ var formSumbitHandler = function(event) {
     console.log(event);
 };
 
+var buttonClickHandler = function(event) {
+    // get the language attribute from the clicked element
+    var language = event.target.getAttribute("data-language");
+
+    if (language) {
+        getFeaturedRepos(language);
+
+        // clear out old content
+        repoContainerE1.textContent = "";
+    }
+}
+
 var displayRepos = function(repos, searchTerm) {
+    console.log(repos)
     repoContainerE1.textContent = "";
     repoSearchTerm.textContent = searchTerm;
 
@@ -55,7 +99,7 @@ var displayRepos = function(repos, searchTerm) {
         //format repo name
         var repoName = repos[i].owner.login + "/" + repos[i].name;
 
-        //create a link for each repo
+        //create a container for each repo
         var repoE1 = document.createElement("a");
         repoE1.classList = "list-item flex-row justify-space-between align-center";
         repoE1.setAttribute("href", "./single-repo.html?repo=" + repoName);
@@ -69,8 +113,9 @@ var displayRepos = function(repos, searchTerm) {
 
         // create a status element
         var statusE1 = document.createElement("span");
-        statusE1.classList = "flex-row align cetner";
-     }
+
+        statusE1.classList = "flex-row align-center";
+     
 
         // check if current repo has issues or not
         if (repos[i].open_issues_count > 0) {
@@ -87,5 +132,7 @@ var displayRepos = function(repos, searchTerm) {
         repoContainerE1.appendChild(repoE1);
 };
 
+
 userFormE1.addEventListener("submit", formSumbitHandler);
+languageButtonsE1.addEventListener("click", buttonClickHandler);
 
