@@ -10,21 +10,6 @@ var getUserRepos = function(user) {
   
     // make a get request to url
     fetch(apiUrl)
-<<<<<<< HEAD
-        .then(function(response) {
-            // request was successful
-            if (response.ok){
-                response.json().then(function(data) {
-                    displayRepos(data, user);
-                });
-            } else {
-                alert("Error: " + response.statusText);
-            }
-        })
-        .catch(function(error) {
-            //Notice this '.catch()' getting chained onto the end of the'.then()'
-            alert("Unable to connect to GitHub");
-=======
       .then(function(response) {
         // request was successful
         if (response.ok) {
@@ -49,7 +34,6 @@ var getUserRepos = function(user) {
       if (response.ok) {
         response.json().then(function(data) {
           displayRepos(data.items, language);
->>>>>>> feature/user-repos
         });
       } else {
         alert("Error: " + response.statusText);
