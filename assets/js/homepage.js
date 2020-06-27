@@ -97,13 +97,9 @@ var displayRepos = function(repos, searchTerm) {
 
         // create a status element
         var statusE1 = document.createElement("span");
-<<<<<<< Updated upstream
-        statusE1.classList = "flex-row align cetner";
-=======
+
         statusE1.classList = "flex-row align-center";
      
-    
->>>>>>> Stashed changes
 
         // check if current repo has issues or not
         if (repos[i].open_issues_count > 0){
