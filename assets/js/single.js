@@ -1,6 +1,7 @@
 var repoNameE1 = document.querySelector("#repo-name");
 var limitWarningE1 = document.querySelector("#limit-warning");
 var issueContainerE1 = document.querySelector("#issues-container");
+var repoNameE1 = document.querySelector("#repo-name");
 
 
 
@@ -23,6 +24,7 @@ var getRepoName = function() {
 var getRepoIssues = function(repo) {
     var apiUrl = "https://api.github.com/repos/" + repo + "/issues?direction=asc";
 
+    // make a get request to url
     fetch(apiUrl).then(function(response) {
         // request was successful
         if (response.ok) {
@@ -34,11 +36,31 @@ var getRepoIssues = function(repo) {
                     displayWarning(repo);
                 }
             });
+<<<<<<< Updated upstream
         }
         else {
+=======
+        } else {
+>>>>>>> Stashed changes
             document.location.replace("./index.html");
         }
     });
+ };
+
+ var getRepoName = function() {
+     // grab repo name from url query string
+     var queryString = document.location.search;
+     var repoName = queryString.split("=")[1];
+
+     if(repoName) {
+         //display repo name on the page
+         repoNameE1.textContent = repoName;
+
+         getRepoIssues(repoName);
+     } else {
+        // if not repo was given, redirect to the homepage
+        document.location.replace(".index.html");
+     }
  };
 
 var displayIssues = function(issues){
@@ -92,5 +114,9 @@ var displayWarning = function(repo) {
     limitWarningE1.appendChild(linkE1);
 };
 
+<<<<<<< Updated upstream
 getRepoName();
 
+=======
+getRepoIssues("")
+>>>>>>> Stashed changes
