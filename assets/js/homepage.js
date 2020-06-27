@@ -66,7 +66,7 @@ var buttonClickHandler = function(event) {
         // clear out old content
         repoContainerE1.textContent = "";
     }
-}
+};
 
 var displayRepos = function(repos, searchTerm) {
     console.log(repos)
@@ -114,9 +114,8 @@ var displayRepos = function(repos, searchTerm) {
 
         // append container to dom
         repoContainerE1.appendChild(repoE1);
+    }
 };
-
 
 userFormE1.addEventListener("submit", formSumbitHandler);
 languageButtonsE1.addEventListener("click", buttonClickHandler);
-
