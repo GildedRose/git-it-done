@@ -36,12 +36,8 @@ var getRepoIssues = function(repo) {
                     displayWarning(repo);
                 }
             });
-<<<<<<< Updated upstream
-        }
-        else {
-=======
+
         } else {
->>>>>>> Stashed changes
             document.location.replace("./index.html");
         }
     });
@@ -114,9 +110,7 @@ var displayWarning = function(repo) {
     limitWarningE1.appendChild(linkE1);
 };
 
-<<<<<<< Updated upstream
 getRepoName();
 
-=======
-getRepoIssues("")
->>>>>>> Stashed changes
+
+
